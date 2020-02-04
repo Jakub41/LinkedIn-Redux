@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <>
       {profiles.data &&
-        [profiles.data].map((p, k) => <h1>${p.profiles.firstname}</h1>)}
+        [profiles.data].map((p, k) => <h1>${p.firstname}</h1>)}
     </>
   );
 };
