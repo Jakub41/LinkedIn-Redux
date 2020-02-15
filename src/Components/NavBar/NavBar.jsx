@@ -12,7 +12,7 @@ import { removeToken } from "../../Services/api";
 // import Logo from "../../li-logo.png";
 // import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
-import { FiLinkedin, FiHome, fiLogout } from "react-icons/fi";
+import { FiLinkedin, FiHome } from "react-icons/fi";
 import {
   MdRssFeed,
   MdWork,
@@ -23,6 +23,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { TiMessages } from "react-icons/ti";
 import { GiTeacher } from "react-icons/gi";
+import { IoMdLogOut } from "react-icons/io";
 import { AuthAction } from "../../Store/Actions/index";
 
 function NavBar() {
@@ -108,8 +109,8 @@ function NavBar() {
                       <Nav.Item>Learning</Nav.Item>
                     </Nav.Link>
                     <Nav.Link onClick={() => logoutAction()}>
-                      <MdPersonOutline className="nav-icon" />
-                      <Nav.Item>logout</Nav.Item>
+                      <IoMdLogOut className="nav-icon" />
+                      <Nav.Item>Logout</Nav.Item>
                     </Nav.Link>
                   </Nav>
                 </Navbar.Collapse>
