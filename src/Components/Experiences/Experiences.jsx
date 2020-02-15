@@ -3,6 +3,7 @@ import { Row, Col, Container, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { ExperiencesMiddleware } from "../../Store/Middleware";
 import { USERNAME } from "../../Services/constAPI";
+import moment from "moment";
 
 const Experiences = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const Experiences = () => {
                           <Card.Title>{E.role}</Card.Title>
                           <Card.Text>{E.company}</Card.Text>
                           <Card.Text>{E.area}</Card.Text>
-                          <Card.Text>{E.startDate}</Card.Text>
+                          <Card.Text>{moment(E.startDate).format("MMMM DD, YYYY")}</Card.Text>
                         </Card.Body>
                       </Col>
                     </Row>

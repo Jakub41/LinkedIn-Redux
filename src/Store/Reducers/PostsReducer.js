@@ -3,7 +3,8 @@ import { PostsActions } from "../Actions";
 function PostsReducer(
   state = {
     posts: [],
-    error: null
+    error: null,
+    count: ""
   },
   action
 ) {
@@ -18,7 +19,8 @@ function PostsReducer(
     case PostsActions.GET_POSTS_SUCCESS:
       return {
         ...state,
-        posts: action.data
+        posts: action.data.posts,
+        count: action.data.count
       };
     case PostsActions.GET_POSTS_ERROR:
       return {

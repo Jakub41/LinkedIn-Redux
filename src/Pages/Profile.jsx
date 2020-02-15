@@ -16,8 +16,8 @@ const Home = () => {
   }));
 
   useEffect(() => {
-    setLoader(displaySpinner)
-  }, [displaySpinner])
+    setLoader(displaySpinner);
+  }, [displaySpinner]);
 
   useEffect(() => {
     dispatch(ProfileMiddleware.getOneProfile(USERNAME));
@@ -25,7 +25,6 @@ const Home = () => {
 
   return Object.keys(profiles).length !== 0 ? (
     <>
-
       <Jumbotron>
         <Container>
           <Row>
@@ -49,8 +48,6 @@ const Home = () => {
     <h3 className="red-text mt-5">The profile is not available</h3>
   );
 };
-
-
 
 Home.propTypes = {
   profiles: PropTypes.object.isRequired
