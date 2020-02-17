@@ -1,4 +1,4 @@
-import {getExperiencesProfile } from "../../Services/api";
+import { getExperiencesProfile } from "../../Services/api";
 import { ExperiencesActions } from "../Actions";
 
 class ExperiencesMiddleware {
@@ -6,12 +6,14 @@ class ExperiencesMiddleware {
     return dispatch => {
       console.log("Get Experiences");
       dispatch(ExperiencesActions.getAllExperiences(data));
-      getExperiencesProfile(data).then(data => {
-        console.log("DATA >>", data);
-        dispatch(ExperiencesActions.getAllExperiencesSuccess(data));
-      }).catch(err => {
-        console.log("ERROR >>", err)
-      });
+      getExperiencesProfile(data)
+        .then(data => {
+          console.log("DATA >>", data);
+          dispatch(ExperiencesActions.getAllExperiencesSuccess(data));
+        })
+        .catch(err => {
+          console.log("ERROR >>", err);
+        });
     };
   };
 }

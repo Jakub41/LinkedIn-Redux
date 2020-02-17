@@ -1,17 +1,42 @@
-import { getOneProfileByUsername } from "../../Services/api";
+import {
+  getOneProfileByUsername,
+  postMyProfileFistTime
+} from "../../Services/api";
 import { ProfileActions } from "../Actions";
 
 class ProfileMiddleware {
   static getOneProfile = data => {
     return dispatch => {
       console.log("Get one profile");
+      debugger;
       dispatch(ProfileActions.getOneProfile(data));
-      getOneProfileByUsername(data).then(data => {
-        console.log("DATA >>", data);
-        dispatch(ProfileActions.getOneProfileSuccess(data));
-      }).catch(err => {
-        console.log("ERROR >>", err)
-      });
+      getOneProfileByUsername(data)
+        .then(data => {
+          console.log("DATA >>", data);
+          if (data.newProfile) {
+            dispatch(ProfileActions.postMyProfile(data));
+          }
+        })
+        .catch(err => {
+          console.log("ERROR >>", err);
+        });
+    };
+  };
+
+  static postMyProfile = data => {
+    return dispatch => {
+      console.log("Get one profile");
+      dispatch(ProfileActions.getOneProfile(data));
+      postMyProfileFistTime(data)
+        .then(data => {
+          console.log("DATA >>", data);
+          if (data.newProfile) {
+            dispatch(ProfileActions.postMyProfile(data));
+          }
+        })
+        .catch(err => {
+          console.log("ERROR >>", err);
+        });
     };
   };
 }

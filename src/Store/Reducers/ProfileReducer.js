@@ -16,7 +16,18 @@ function ProfileReducer(
         ...state,
         displaySpinner: true
       };
+    case ProfileActions.M:
+      return {
+        ...state,
+        displaySpinner: true
+      };
     case ProfileActions.GET_ONE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profiles: action.data,
+        displaySpinner: false
+      };
+    case ProfileActions.POST_MY_PROFILE:
       return {
         ...state,
         profiles: action.data,

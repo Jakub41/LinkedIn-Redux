@@ -25,8 +25,6 @@ class PostsActions {
       success: false
     };
   };
-
-
 }
 
 export default PostsActions;

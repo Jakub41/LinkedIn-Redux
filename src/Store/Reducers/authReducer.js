@@ -1,4 +1,4 @@
-import { AuthAction } from "../Actions";
+import { AuthAction, ProfileActions } from "../Actions";
 
 function ProfileReducer(
   state = {
@@ -29,7 +29,15 @@ function ProfileReducer(
         displaySpinner: false,
         errors: action.data
       };
-
+    case ProfileActions.POST_MY_PROFILE:
+      return {
+        ...state,
+        auth: {
+          ...state.auth,
+          user: { ...state.auth.user, profile: action.data.newProfile }
+        },
+        displaySpinner: false
+      };
     case AuthAction.GET_LOGOUT:
       return {
         ...state,
