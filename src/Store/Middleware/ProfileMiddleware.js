@@ -8,7 +8,7 @@ class ProfileMiddleware {
   static getOneProfile = data => {
     return dispatch => {
       console.log("Get one profile");
-      debugger;
+      ;
       dispatch(ProfileActions.getOneProfile(data));
       getOneProfileByUsername(data)
         .then(data => {

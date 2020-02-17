@@ -8,12 +8,12 @@ import {
   AUTOLOADUSER
 } from "./constAPI";
 import PropTypes from "prop-types";
-import { func } from "prop-types";
 
 const createAPIQuery = urlGenerator => async (...params) => {
   try {
     const url = urlGenerator(...params);
     const token = await gettoken();
+    ;
     let options = {};
     if (token) {
       options = {
@@ -50,13 +50,28 @@ const createAPIQuery = urlGenerator => async (...params) => {
 const createAPIQueryWithPost = ApiPath => async ({ ...params }) => {
   try {
     const url = ApiPath();
-    const options = {
-      method: "POST",
-      body: JSON.stringify(params),
-      headers: new Headers({
-        "Content-Type": "application/json"
-      })
-    };
+    ;
+    const token = await gettoken();
+    let options = {};
+    if (token) {
+      options = {
+        method: "POST",
+        body: JSON.stringify(params),
+        headers: new Headers({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        })
+      };
+    } else {
+      options = {
+        method: "POST",
+        body: JSON.stringify(params),
+        headers: new Headers({
+          "Content-Type": "application/json"
+        })
+      };
+    }
+
     const response = await fetch(url, options);
     console.log(response);
     const json = await response.json();
@@ -93,6 +108,10 @@ export const PostRegister = createAPIQueryWithPost(() => `${API_URL}${SIGNUP}`);
 
 export const PostLogin = createAPIQueryWithPost(() => `${API_URL}${LOGIN}`);
 
+export const postMyProfileFistTime = createAPIQueryWithPost(
+  () => `${API_URL}${PROFILES}`
+);
+
 export const savetoken = async token => {
   await localStorage.setItem("acTokenas", token);
 };
@@ -108,6 +127,3 @@ createAPIQuery.propTypes = {
   url: PropTypes.string,
   response: PropTypes.object
 };
-
-// authorization token
-// Authorization: "Bearer " + auth,

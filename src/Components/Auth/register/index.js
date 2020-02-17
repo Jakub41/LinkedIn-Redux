@@ -93,10 +93,6 @@ const Register = props => {
           });
         }
         break;
-      default:
-        setFormData({
-          ...formData
-        });
     }
   };
 
@@ -112,7 +108,7 @@ const Register = props => {
 
   const handleSubmit = e => {
     const { email, password, remember } = formData;
-    console.log(formData.password);
+  
     dispatch(RegisterMiddleware.getRegister({ email, password }));
   };
 
@@ -121,7 +117,7 @@ const Register = props => {
       {AuthReducer.auth ? (
         AuthReducer.auth.user ? (
           AuthReducer.auth.user._id ? (
-            <Redirect to="home" />
+            <Redirect to="createProfile" />
           ) : null
         ) : null
       ) : null}

@@ -1,21 +1,26 @@
 import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
 import { BrowserRouter as Router } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { Container } from "react-bootstrap";
-
 import "./App.css";
+
 import AuthMiddleware from "./Store/Middleware/AuthMiddleWare";
-import PrivateRoute from "./utils/privateRoute";
+
+import { useDispatch, useSelector } from "react-redux";
 
 // Components
 import NavBar from "./Components/NavBar/NavBar";
 
 // Pages
-import RegisterPage from "./Pages/Register";
-import loginPage from "./Pages/Login";
 import Home from "./Pages/Profile";
 import Feeds from "./Pages/Feeds";
+import createProfilePage from "./Pages/createProfile";
+import RegisterPage from "./Pages/Register";
+import loginPage from "./Pages/Login";
+import PrivateRoute from "./utils/privateRoute";
+import ProtectedRoute from "./utils/protectedRoute";
+import AdminDashbord from "./Pages/AdminDashbord";
+import AdminRoute from "./utils/adminRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,19 +29,23 @@ function App() {
     dispatch(AuthMiddleware.Autoload());
   }, [dispatch]);
 
-  let { auth } = useSelector(state => state.AuthReducer);
-
   return (
     <>
-      <NavBar />
-      <Router basename="/">
+      <Router>
+        <NavBar />
         <Container>
           <Switch>
             <Route exact path="/login" component={loginPage} />
+            <ProtectedRoute
+              path="/createProfile"
+              component={createProfilePage}
+            />
+            <AdminRoute path="/dashboard" component={AdminDashbord} />
+
+            <PrivateRoute path="/home" component={Home} />
+            <PrivateRoute path="/pages/feeds" component={Feeds} />
+
             <Route exact path="/" component={RegisterPage} />
-            {/* Private routes */}
-            <PrivateRoute exact path="/home" component={Home} />
-            <PrivateRoute exact path="/pages/feeds" component={Feeds} />
           </Switch>
         </Container>
       </Router>

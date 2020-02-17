@@ -69,10 +69,6 @@ const Login = props => {
           });
         }
         break;
-      default:
-        setFormData({
-          ...formData
-        });
     }
   };
 
@@ -92,9 +88,11 @@ const Login = props => {
     <div className="loginPageItem">
       {AuthReducer.auth ? (
         AuthReducer.auth.user ? (
-          AuthReducer.auth.user._id ? (
+          AuthReducer.auth.user.rule !== "admin" ? (
             <Redirect to="home" />
-          ) : null
+          ) : (
+            <Redirect to="dashboard" />
+          )
         ) : null
       ) : null}
       <div className="loginItem">
